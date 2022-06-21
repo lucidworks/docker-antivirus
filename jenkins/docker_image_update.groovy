@@ -50,8 +50,11 @@ pipeline {
                       [$class: 'UsernamePasswordMultiBinding', credentialsId: 'ARTIFACTORY_JENKINS' , usernameVariable: 'ORG_GRADLE_PROJECT_lucidArtifactoryUsername', passwordVariable: 'ORG_GRADLE_PROJECT_lucidArtifactoryPassword']
                     ]){
                           docker.withRegistry('https://fusion-dev-docker.ci-artifactory.lucidworks.com', 'ARTIFACTORY_JENKINS') {
-                                 def dockerAntivirus = docker.image("fusion-dev-docker.ci-artifactory.lucidworks.com/docker-antivirus:latest")
-                                 dockerAntivirus.push("latest")
+                            sh """
+                              docker build fusion-dev-docker.ci-artifactory.lucidworks.com/docker-antivirus .
+                            """
+                            def dockerAntivirus = docker.image("fusion-dev-docker.ci-artifactory.lucidworks.com/docker-antivirus:latest")
+                            dockerAntivirus.push("latest")
                           }
                           sh """
                             docker rmi fusion-dev-docker.ci-artifactory.lucidworks.com/docker-antivirus:latest
