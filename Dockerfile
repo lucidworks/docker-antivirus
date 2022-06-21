@@ -1,9 +1,11 @@
-FROM centos
-LABEL maintainer "Wassim DHIF <wassimdhif@gmail.com>"
-
-RUN yum install -y make gcc-c++ ruby-devel coreutils atomic docker
+FROM debian:stretch
 
 ADD . /app
 WORKDIR /app
 
+RUN apt update && \
+    apt install -y gcc build-essential ruby build-essential clamav clamav-daemon ruby-dev && \
+    freshclam
+
 RUN gem install bundler && bundle install
+
