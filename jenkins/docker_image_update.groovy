@@ -51,7 +51,7 @@ pipeline {
                     ]){
                           docker.withRegistry('https://fusion-dev-docker.ci-artifactory.lucidworks.com', 'ARTIFACTORY_JENKINS') {
                             sh """
-                              docker build fusion-dev-docker.ci-artifactory.lucidworks.com/docker-antivirus .
+                              docker build -t fusion-dev-docker.ci-artifactory.lucidworks.com/docker-antivirus .
                             """
                             def dockerAntivirus = docker.image("fusion-dev-docker.ci-artifactory.lucidworks.com/docker-antivirus:latest")
                             dockerAntivirus.push("latest")
