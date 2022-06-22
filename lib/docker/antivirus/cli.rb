@@ -15,14 +15,13 @@ module Docker
       def scan
         if options[:pull]
           puts "Pulling #{options[:image]}"
-          system("docker pull #{options[:image]}")
+          system("podman pull #{options[:image]}")
         end
         begin
-          directory = Docker::Antivirus::Helpers.create_directory
-          Docker::Antivirus::Helpers.atomic_mount(options[:image], directory)
+          directory = Docker::Antivirus::Helpers.atomic_mount(options[:image])
           result = Docker::Antivirus::Helpers.clamav_scan(options[:image], directory)
         ensure
-          Docker::Antivirus::Helpers.cleanup(directory)
+          Docker::Antivirus::Helpers.cleanup()
         end
         if result
           puts "\e[32mNo virus detected in #{options[:image]}\e[0m"
