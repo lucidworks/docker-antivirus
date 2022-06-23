@@ -1,9 +1,10 @@
-FROM quay.io/podman/stable
+FROM quay.io/podman/stable:v4.1.1
 
 ADD . /app
 WORKDIR /app
 
-RUN yum install -y make gcc-c++ coreutils clamav ruby-devel slirp4netns fuse-overlayfs
+RUN yum upgrade -y && \
+    yum install -y make gcc-c++ coreutils clamav ruby-devel
 
 ADD registries.conf /etc/containers/registries.conf
 
