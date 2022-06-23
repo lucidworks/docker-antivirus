@@ -15,7 +15,7 @@ module Docker
       def scan
         if options[:pull]
           puts "Pulling #{options[:image]}"
-          system("podman pull #{options[:image]}")
+          system("podman unshare pull #{options[:image]}")
         end
         begin
           directory = Docker::Antivirus::Helpers.atomic_mount(options[:image])
