@@ -1,17 +1,10 @@
-FROM debian:bullseye
+FROM quay.io/podman/stable
 
 ADD . /app
 WORKDIR /app
 
-RUN apt update && \
-    apt install -y gcc build-essential ruby clamav clamav-daemon ruby-dev podman && \
-    apt-get clean && \
-    useradd jenkins -d /home/jenkins -m -u 7000 -s /bin/bash && \
-    freshclam
+RUN yum install -y make gcc-c++ coreutils clamav ruby-devel slirp4netns fuse-overlayfs
 
 ADD registries.conf /etc/containers/registries.conf
 
 RUN gem install bundler && bundle install
-
-USER jenkins
-
