@@ -16,4 +16,5 @@ ADD registries.conf /etc/containers/registries.conf
 
 USER 7000
 
-RUN gem install bundler && bundle install
+RUN sudo gem install bundler && \
+    sudo bundle install
