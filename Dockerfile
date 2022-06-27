@@ -14,6 +14,6 @@ RUN echo "zchunk = False" >> /etc/dnf/dnf.conf && \
 
 ADD registries.conf /etc/containers/registries.conf
 
-RUN gem install bundler && bundle install
-
 USER 7000
+
+RUN gem install bundler && bundle install
