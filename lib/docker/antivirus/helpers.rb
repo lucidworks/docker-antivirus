@@ -10,7 +10,7 @@ module Docker
 
       def atomic_mount(image)
         puts "Mounting #{image}"
-        stdout, stderr, status = Open3.capture3("podman image mount #{image}")
+        stdout, stderr, status = Open3.capture3("podman unshare podman image mount #{image}")
         puts "Mounting #{image} in #{stdout}"
         stdout
       end
@@ -21,7 +21,7 @@ module Docker
       end
 
       def cleanup()
-        system("podman image umount --all")
+        system("podman unshare image unmount --all")
         puts "Directory cleaned up"
       end
     end
