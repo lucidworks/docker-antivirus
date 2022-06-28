@@ -7,9 +7,10 @@ ADD groupcfg.sh groupcfg.sh
 
 RUN echo "zchunk = False" >> /etc/dnf/dnf.conf && \
     yum upgrade -y && \
-    yum install -y make gcc-c++ coreutils clamav ruby-devel && \
+    yum install -y make gcc-c++ coreutils clamav ruby-devel python-pip && \
     groupadd jenkins -g 7000 && \
     useradd jenkins -d /home/jenkins -m -u 7000 -g 7000 -s /bin/bash && \
+    pip install PyYAML && \
     bash groupcfg.sh
 
 ADD registries.conf /etc/containers/registries.conf
