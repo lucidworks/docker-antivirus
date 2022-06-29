@@ -21,7 +21,7 @@ module Docker
       end
 
       def cleanup()
-        system("podman unshare image unmount --all")
+        system("podman unshare podman image unmount --all")
         puts "Directory cleaned up"
       end
     end
