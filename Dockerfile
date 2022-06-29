@@ -6,7 +6,7 @@ WORKDIR /app
 ADD groupcfg.sh groupcfg.sh
 
 RUN yum upgrade -y && \
-    yum install -y make gcc-c++ coreutils clamav ruby-devel python-pip && \
+    yum install -y make gcc-c++ coreutils clamav clamav-update ruby-devel python-pip && \
     groupadd jenkins -g 7000 && \
     useradd jenkins -d /home/jenkins -m -u 7000 -g 7000 -s /bin/bash && \
     pip install PyYAML && \
