@@ -1,5 +1,5 @@
 pipeline {
-    agent { node { label  'fusionDockerNewBuildWorker' } }
+    agent { node { label  'fusionBuildWorkerDockerVersion20_10_22' } }
     options{
       buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '14', numToKeepStr: '28'))
       timestamps()
